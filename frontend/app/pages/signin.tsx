@@ -9,7 +9,7 @@ function HomePage() {
       <CSSReset />
       <Box p={4}>
         <Heading as="h1" size="4xl">
-          Welcome to about
+          Welcome to sign in page
         </Heading>
         <p>Life is supofa</p>
       </Box>

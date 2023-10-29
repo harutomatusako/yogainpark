@@ -1,14 +1,17 @@
-import { ChakraProvider, CSSReset, Box, Heading } from "@chakra-ui/react";
+import { ChakraProvider, CSSReset, Box, Heading ,Button} from "@chakra-ui/react";
+import Header from '../components/Header';
+
 
 function HomePage() {
   return (
     <ChakraProvider>
+      <Header />
       <CSSReset />
       <Box p={4}>
-        <Heading as="h1" size="2xl">
-          Welcome to My Next.js App with Chakra UI
+        <Heading as="h1" size="4xl">
+          Welcome to Yoga in the park
         </Heading>
-        <p>This is your index page with Chakra UI.</p>
+        <p>Life is supofa</p>
       </Box>
     </ChakraProvider>
   );
