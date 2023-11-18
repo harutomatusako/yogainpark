@@ -2,14 +2,17 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { getApps, initializeApp } from "firebase/app";
+import Header from "@/components/Header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
+      <Header />
       <Component {...pageProps} />
     </ChakraProvider>
   );
 }
+
 
 if (typeof window !== "undefined" && getApps().length === 0) {
   const firebaseConfig = {

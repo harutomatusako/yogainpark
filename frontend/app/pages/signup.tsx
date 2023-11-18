@@ -20,6 +20,7 @@ type Inputs = {
   email: string;
   password: string;
   confirmationPassword: string;
+  username: string;
 };
 
 export default function Signup() {
@@ -68,7 +69,7 @@ export default function Signup() {
     
     <Flex>
       <Box
-        w="50%"
+        w="100%"
         display="flex"
         flexDirection="column"
         justifyContent="center"
@@ -89,6 +90,19 @@ export default function Signup() {
         >
           <Box w="100%">
             <form onSubmit={handleSubmit(onSubmit)}>
+            　<FormLabel fontWeight="bold">ユーザー名</FormLabel>
+              {errors.username && (
+                <Text color="red.400" mb="8px">
+                  ユーザー名は必須です
+                </Text>
+              )}
+              <Input
+                type="text"
+                size="lg"
+                mb="8"
+                placeholder="ユーザー名"
+                {...register("username", { required: true })}
+              />
               <FormLabel fontWeight="bold">Eメール</FormLabel>
               {errors.email && (
                 <Text color="red.400" mb="8px">
@@ -102,6 +116,7 @@ export default function Signup() {
                 placeholder="example@test.com"
                 {...register("email", { required: true })}
               />
+
               <FormLabel fontWeight="bold">パスワード</FormLabel>
               {errors.password && (
                 <Text color="red.400" mb="8px">
@@ -134,7 +149,7 @@ export default function Signup() {
                 <Button
                   type="submit"
                   color="white"
-                  background="gray.800"
+                  background="teal"
                   size="lg"
                   paddingX="80px"
                   m="0 auto"
@@ -150,12 +165,13 @@ export default function Signup() {
           </Box>
         </Box>
       </Box>
-      <Image
+      {/* <Image
         w="50%"
         h="100vh"
         alt="カバー画像"
         src="https://images.unsplash.com/photo-1652554715588-60c932f66a0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-      />
+      /> */}
+      
     </Flex>
   );
 }

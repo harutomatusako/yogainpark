@@ -55,7 +55,7 @@ export default function Login() {
   return (
     <Flex>
       <Box
-        w="50%"
+        w="100%"
         display="flex"
         flexDirection="column"
         justifyContent="center"
@@ -109,7 +109,7 @@ export default function Login() {
                 <Button
                   type="submit"
                   color="white"
-                  background="gray.800"
+                  background="teal"
                   size="lg"
                   paddingX="80px"
                   m="0 auto"
@@ -125,12 +125,12 @@ export default function Login() {
           </Box>
         </Box>
       </Box>
-      <Image
+      {/* <Image
         w="50%"
         h="100vh"
         alt="カバー画像"
         src="https://images.unsplash.com/photo-1652554715588-60c932f66a0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-      />
+      /> */}
     </Flex>
   );
 }
