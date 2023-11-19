@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import {
   Box,
@@ -12,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { createEvent } from '@/_mutations/createEvent';
 
-const Event = () => {
+export const EventForm = () => {
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventPrefecture, setEventPrefecture] = useState(''); // 開催都道府県
@@ -146,5 +148,3 @@ const Event = () => {
     </Box>
   );
 };
-
-export default Event;

@@ -1,3 +1,5 @@
+"use client"
+
 import { createEvent } from '@/_mutations/createEvent';
 import { useAuth, useUser } from '@/hooks/firebase';
 import { Box, Input, Heading, Spacer, Button } from '@chakra-ui/react';
