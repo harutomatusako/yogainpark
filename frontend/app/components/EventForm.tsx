@@ -13,12 +13,12 @@ export const EventForm: React.FC = () => {
    */
   const onCreate = async () => {
     try {
-      await createEvent({
-        name: name,
-        description: "サンプルのイベントです",
-        place: "東京都渋谷区",
-        time: new Date(),
-      });
+      // await createEvent({
+      //   name: name,
+      //   description: "サンプルのイベントです",
+      //   place: "東京都渋谷区",
+      //   time: new Date(),
+      // });
     } catch (err) {
       console.log(err);
     }

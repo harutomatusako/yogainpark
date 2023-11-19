@@ -10,6 +10,7 @@ import {
   Text,
   HStack, // HStackを追加
 } from '@chakra-ui/react';
+import { createEvent } from '@/_mutations/createEvent';
 
 const Event = () => {
   const [eventName, setEventName] = useState('');
@@ -44,17 +45,14 @@ const Event = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const eventData = {
+    await createEvent({
       name: eventName,
       description: eventDescription,
       prefecture: eventPrefecture, // 開催都道府県
       location: eventLocation, // 開催場所
       date: eventDate + ' ' + eventTime,
       organizer: eventOrganizer,
-    };
-
-    // ... 以降のコードは変更の必要がない
-
+    });
   };
 
   return (

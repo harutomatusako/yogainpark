@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from "firebase/app";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
 
 type Props = {
   name: string
@@ -11,9 +11,9 @@ type Props = {
 }
 
  /**
- * イベントを作成する
+ * イベントを更新する
  */
-export const createEvent = async (props: Props) => {
+export const updateEvent = async (eventId: string, props: Props) => {
   try {
     const firebaseConfig = {
       apiKey: "AIzaSyCjknOD6KwPAVI1HbY2n45Tz8nJy_2Kxw0",
@@ -32,7 +32,7 @@ export const createEvent = async (props: Props) => {
      * 書き込む先のコレクション
      * 参考: https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ja
      */
-    const ref = collection(getFirestore(), "events")
+    const ref = doc(getFirestore(), "events", eventId)
     /**
      * 追加するイベントのデータ
      */
@@ -43,10 +43,10 @@ export const createEvent = async (props: Props) => {
       prefecture: props.prefecture,
       date: props.date,
       organizer: props.organizer,
-      createdAt: new Date(),
+      updatedAt: new Date(),
     }
     // イベントを書き込む
-    await addDoc(ref, data);
+    await updateDoc(ref, data);
   } catch (err) {
     console.log(err);
   }

@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-
 if (typeof window !== "undefined" && getApps().length === 0) {
   const firebaseConfig = {
     apiKey: "AIzaSyCjknOD6KwPAVI1HbY2n45Tz8nJy_2Kxw0",
