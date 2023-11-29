@@ -7,7 +7,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useContext } from 'react';
 
-function Header() {
+export function AppHeader() {
   const appContext = useContext(AppContext);
   
   // const auth = useAuth();
@@ -44,6 +44,11 @@ function Header() {
             {"Log in"}
           </Button>
         )}
+         {appContext.isLoggedIn && (
+          <Button as={Link} href="/events/event" colorScheme="teal" variant="outline" color="white">
+          イベント開催
+       　 </Button>
+        )}
         {appContext.isLoggedIn && (
           <Button onClick={onLogout} colorScheme="teal" variant="outline" color="white">
             {"Log out"}
@@ -53,9 +58,3 @@ function Header() {
     </Box>
   );
 }
-
-
-
-
-
-export default Header;
