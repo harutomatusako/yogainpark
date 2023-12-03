@@ -17,11 +17,15 @@ type Params = {
 }
 
 type Props = { 
-  event: AppEvent;
+  event: AppEvent | null;
 }
 
 function EventDetails(props: Props) {
   const event = props.event
+
+  if (event === null) {
+    return <div>{"データなし"}</div>
+  }
 
   return (
     <Center h="100vh">
@@ -46,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   }
 
   if (context.params === undefined) {
-    return {}
+    return { props: { event: null } }
   }
 
   const eventId = context.params?.event

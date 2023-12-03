@@ -29,7 +29,6 @@ function HomePage(props: Props) {
 export const getStaticProps: GetStaticProps<Props> = async () => {
   if (getApps().length === 0) {
     const serviceAccount = require('../service-account.json');
-    console.log("serviceAccount",serviceAccount)
     initializeApp({ credential: cert(serviceAccount) });
   }
 

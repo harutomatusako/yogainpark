@@ -12,9 +12,13 @@ import {
   Text,
   HStack, // HStackを追加
 } from '@chakra-ui/react';
-import { createEvent } from '@/_mutations/createEvent';
+import { createEvent } from '../_mutations/createEvent';
+
+
 
 export const EventForm = () => {
+　
+
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventPrefecture, setEventPrefecture] = useState(''); // 開催都道府県
