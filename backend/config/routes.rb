@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :events
   resources :posts
   match '*path' => 'options_request#response_preflight_request', via: :options

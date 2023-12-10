@@ -2,29 +2,21 @@ import { getApps, initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from "firebase-admin/firestore";
 import { Box, Text, Center, Button } from '@chakra-ui/react'; // Import Chakra UI components
 import { GetStaticPaths, GetStaticProps } from 'next';
-
-type AppEvent = {
-  id: string
-  name: string
-  description: string
-  location: string
-  date: string
-  organizer: string
-}
+import useSWR from 'swr';
 
 type Params = {
   event: string;
 }
 
 type Props = { 
-  event: AppEvent | null;
+  eventId: string | null;
 }
 
 function EventDetails(props: Props) {
-  const event = props.event
+  const { data: event } = useSWR(`http://localhost:3000/events/${props.eventId}`)
 
-  if (event === null) {
-    return <div>{"データなし"}</div>
+  if (typeof event === "undefined") {
+    return null
   }
 
   return (
@@ -44,66 +36,17 @@ function EventDetails(props: Props) {
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
-  if (getApps().length === 0) {
-    const serviceAccount = require('../../../service-account.json');
-    initializeApp({ credential: cert(serviceAccount) });
-  }
-
   if (context.params === undefined) {
     return { props: { event: null } }
   }
 
-  const eventId = context.params?.event
+  const eventId = context.params!.event!
 
-  /**
-   * イベント一覧を取得
-   */
-  const snap = await getFirestore().collection('events').doc(eventId).get();
-  
-  const data = snap.data() as any ?? null
-
-  if (data === null) {
-    return <Center h="100vh"><div>{"データなし"}</div></Center>
-  }
- 
-  /**
-   * 加工したイベントのデータ
-   */ 
-  const event: AppEvent = {
-    id: snap.id,
-    name: data.name,
-    description: data.description,
-    location: data.location,
-    date: data.date,
-    organizer: data.organizer,
-  }
-
-  return { props: { event } }
+  return { props: { eventId } }
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  if (getApps().length === 0) {
-    const serviceAccount = require('../../../service-account.json');
-    initializeApp({ credential: cert(serviceAccount) });
-  }
-  
-  /**
-   * RailsのAPIから取得する予定
-   * イベント一覧を取得
-   */
-  const querySnap = await getFirestore().collection('events').get();
-  
-  const eventIds = querySnap.docs.map((doc) => {
-    return doc.id
-  })
-
-  const paths = eventIds.map(eventId => {
-    return {
-      params: {
-        event: eventId,
-      }
-    }
-  })
+  const paths = [] as any
 
   return {
     paths,

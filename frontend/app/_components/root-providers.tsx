@@ -4,6 +4,7 @@ import { CSSReset, ChakraProvider } from "@chakra-ui/react";
 import { initializeApp, getApps } from "firebase/app";
 import { AppContextProvider } from "./app-context-provider";
 import { CacheProvider } from "@chakra-ui/next-js"
+import { SWRConfig } from 'swr'
 
 type Props = {
   children: React.ReactNode
@@ -12,12 +13,19 @@ type Props = {
 export const RootProviders = (props: Props) => {
   return (
     <AppContextProvider>
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+        }}
+      >
       <CacheProvider>
         <ChakraProvider>
           <CSSReset />
           {props.children}
         </ChakraProvider>
       </CacheProvider>
+      </SWRConfig>
     </AppContextProvider>
   )
 }

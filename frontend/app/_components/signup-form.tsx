@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { AppContext } from "@/_contexts/app-context";
+import { createUser } from "@/_mutations/create-user";
 
 type Inputs = {
   email: string;
@@ -46,6 +47,7 @@ export function SignUpForm() {
     try {
       setIsProcessingSignup(true);
       await createUserWithEmailAndPassword(getAuth(), email, password);
+      await createUser({ email });
       setIsProcessingSignup(false);
     } catch (e) {
       console.error(e);
