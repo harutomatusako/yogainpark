@@ -13,17 +13,24 @@ import {
   HStack, // HStackを追加
 } from '@chakra-ui/react';
 import { createEvent } from '../_mutations/createEvent';
+import { updateEvent } from '../_mutations/updateEvent';
 
+type Props = {
+  eventId: string
+  name: string;
+  description: string;
+  prefecture: string;
+  location: string;
+  date: string;
+  organizer: string;
+}
 
-
-export const EventForm = () => {
-  const [eventName, setEventName] = useState('');
-  const [eventDescription, setEventDescription] = useState('');
-  const [eventPrefecture, setEventPrefecture] = useState(''); // 開催都道府県
-  const [eventLocation, setEventLocation] = useState(''); // 開催場所
-  const [eventDate, setEventDate] = useState('');
-  const [eventTime, setEventTime] = useState('');
-  const [eventOrganizer, setEventOrganizer] = useState('');
+export const UpdateEventForm = (props: Props) => {
+  const [eventName, setEventName] = useState(props.name);
+  const [eventDescription, setEventDescription] = useState(props.description);
+  const [eventPrefecture, setEventPrefecture] = useState(props.prefecture); // 開催都道府県
+  const [eventLocation, setEventLocation] = useState(props.location); // 開催場所
+  const [eventOrganizer, setEventOrganizer] = useState(props.organizer);
 
   const prefectures = [
     '北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島', '茨城', '栃木', '群馬',
@@ -49,12 +56,12 @@ export const EventForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await createEvent({
+    await updateEvent(props.eventId, {
       name: eventName,
       description: eventDescription,
       prefecture: eventPrefecture, // 開催都道府県
       location: eventLocation, // 開催場所
-      date: eventDate + ' ' + eventTime,
+      date: props.date,
       organizer: eventOrganizer,
     });
   };
@@ -69,7 +76,7 @@ export const EventForm = () => {
       justifyContent="center"
       height="100vh"
     >
-      <Text fontSize="2xl" fontWeight="bold" mb={4}>新しいイベントを投稿</Text>
+      <Text fontSize="2xl" fontWeight="bold" mb={4}>イベントを編集</Text>
 
       <form onSubmit={handleSubmit}>
         <FormControl>
@@ -116,7 +123,7 @@ export const EventForm = () => {
           </FormControl>
         </HStack>
         <HStack spacing={4} mt={4}>
-        <FormControl mt={4}>
+        {/* <FormControl mt={4}>
           <FormLabel>開催日:</FormLabel>
           <Input
             type="date"
@@ -124,8 +131,8 @@ export const EventForm = () => {
             onChange={(e) => setEventDate(e.target.value)}
             required
           />
-        </FormControl>
-        <FormControl mt={4}>
+        </FormControl> */}
+        {/* <FormControl mt={4}>
           <FormLabel>開催時間:</FormLabel>
           <Select
             value={eventTime}
@@ -138,12 +145,12 @@ export const EventForm = () => {
               </option>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
         </HStack>
         
         <Box mt={4} textAlign="center"> {/* ボタンを中央に配置 */}
           <Button colorScheme="teal" type="submit">
-            投稿
+            変更
           </Button>
         </Box>
       </form>

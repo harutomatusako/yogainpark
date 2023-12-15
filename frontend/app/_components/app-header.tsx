@@ -45,7 +45,7 @@ export function AppHeader() {
           </Button>
         )}
          {appContext.isLoggedIn && (
-          <Button as={Link} href="/events/event" colorScheme="teal" variant="outline" color="white">
+          <Button as={Link} href="/events/create" colorScheme="teal" variant="outline" color="white">
           イベント開催
        　 </Button>
         )}

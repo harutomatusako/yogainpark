@@ -15,24 +15,6 @@ type Props = {
  */
 export const updateEvent = async (eventId: string, props: Props) => {
   try {
-    const firebaseConfig = {
-      apiKey: "AIzaSyCjknOD6KwPAVI1HbY2n45Tz8nJy_2Kxw0",
-      authDomain: "yogainpark-88488.firebaseapp.com",
-      projectId: "yogainpark-88488",
-      storageBucket: "yogainpark-88488.appspot.com",
-      messagingSenderId: "17403037402",
-      appId: "1:17403037402:web:370bbfba82e83da95a07e3",
-      measurementId: "G-HST8FC4YZV"
-    };
-    if (typeof window !== "undefined" && getApps().length === 0) {
-      initializeApp(firebaseConfig)
-    }
-
-    /**
-     * 書き込む先のコレクション
-     * 参考: https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ja
-     */
-    const ref = doc(getFirestore(), "events", eventId)
     /**
      * 追加するイベントのデータ
      */
@@ -44,9 +26,23 @@ export const updateEvent = async (eventId: string, props: Props) => {
       date: props.date,
       organizer: props.organizer,
       updatedAt: new Date(),
-    }
-    // イベントを書き込む
-    await updateDoc(ref, data);
+      user_id: 2
+    }  
+
+    const railsApiEndpoint = `http://localhost:3000/events/${eventId}`;
+
+    // Rails APIにデータを送信
+    const response = await fetch(railsApiEndpoint, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    // レスポンスをログに出力
+    console.log(response);
   } catch (err) {
     console.log(err);
   }

@@ -3,8 +3,7 @@ import { getFirestore } from "firebase-admin/firestore";
 import { Box, Text, Center, Button } from '@chakra-ui/react'; // Import Chakra UI components
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useSWR from 'swr';
-import { deleteEvent } from '@/_mutations/delete-event';
-import { useRouter } from 'next/router';
+import { UpdateEventForm } from '@/_components/update-event-form';
 
 type Params = {
   event: string;
@@ -15,36 +14,27 @@ type Props = {
 }
 
 function EventDetails(props: Props) {
-  const router = useRouter()
-
   const { data: event } = useSWR(`http://localhost:3000/events/${props.eventId}`)
 
   if (typeof event === "undefined") {
     return null
   }
 
-  const onDelete = async () => {
-    if (props.eventId === null) return
-    deleteEvent(props.eventId)
-    alert('削除しました')
-    router.push('/')
+  if (props.eventId === null) {
+    return null
   }
 
   return (
     <Center h="100vh">
-      <Box p={8} borderWidth="2px" borderRadius="lg" textAlign="center">
-        <Text fontSize="4xl" fontWeight="bold" mb={6}>{event.name}</Text>
-        <Text fontSize="xl" mb={4}>{event.description}</Text>
-        <Text fontSize="lg">開催場所: {event.location}</Text>
-        <Text fontSize="lg">開催日時: {event.date}</Text>
-        <Text fontSize="lg">開催者名: {event.organizer}</Text>
-        <Button mt={6} colorScheme="teal">
-          参加する
-        </Button>
-        <Button onClick={onDelete} mt={6} colorScheme="teal">
-          削除
-        </Button>
-      </Box>
+      <UpdateEventForm
+        eventId={props.eventId}
+        name={event.name}
+        description={event.description}
+        prefecture={event.prefecture}
+        location={event.location}
+        date={event.date}
+        organizer={event.organizer}
+      />
     </Center>
   );
 };

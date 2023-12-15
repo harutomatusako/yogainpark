@@ -11,7 +11,10 @@ export const createEvent = async (props) => {
       date: props.date,
       organizer: props.organizer,
       createdAt: new Date(),
+      user_id: 2
     };
+
+    alert("イベントを作成！")
 
     // Rails APIにデータを送信
     const response = await fetch(railsApiEndpoint, {
