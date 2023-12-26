@@ -8,6 +8,7 @@ type Props = {
   location: string
   organizer: string
   date: string
+  participant_ids?: number[]
 }
 
  /**
@@ -26,7 +27,8 @@ export const updateEvent = async (eventId: string, props: Props) => {
       date: props.date,
       organizer: props.organizer,
       updatedAt: new Date(),
-      user_id: 2
+      user_id: 2,
+      participant_ids: props.participant_ids ?? [],
     }  
 
     const railsApiEndpoint = `http://localhost:3000/events/${eventId}`;

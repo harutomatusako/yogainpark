@@ -31,8 +31,8 @@ export function AppHeader() {
         <Button as={Link} href="/" colorScheme="teal" variant="outline" color="white">
           TOP
         </Button>
-        <Button as={Link} href="/about" colorScheme="teal" variant="outline" color="white">
-          About
+        <Button as={Link} href="/events" colorScheme="teal" variant="outline" color="white">
+          開催イベント一覧
         </Button>
         {appContext.isNotLoggedIn && (
           <Button as={Link} href="/signup" colorScheme="teal" variant="outline" color="white">

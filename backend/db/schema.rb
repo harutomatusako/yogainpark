@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_15_151013) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_18_141120) do
   create_table "event_users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "users_id", null: false
     t.bigint "events_id", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_151013) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.json "participant_ids"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

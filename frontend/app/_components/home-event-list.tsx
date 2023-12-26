@@ -1,8 +1,15 @@
 "use client"
 
 import { createUser } from "@/_mutations/create-user";
-import { Box, Text, Heading ,ListItem ,UnorderedList ,Flex} from "@chakra-ui/react";
+import { Box, Text, Heading ,ListItem ,UnorderedList ,Flex,Center,Image} from "@chakra-ui/react";
 import useSWR from "swr";
+
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  return new Intl.DateTimeFormat('ja-JP', options).format(new Date(dateString));
+}
+
+
 
 export function HomeEventList() {
   const { data: events } = useSWR('http://localhost:3000/events')
@@ -12,24 +19,12 @@ export function HomeEventList() {
   }
 
   return (
-    <div className={"flex flex-col space-y-4"}>
-      <button onClick={() => {
-        createUser({ email: "haruto@example.com" });
-      }}>{"デバッグ（ユーザを追加する）"}</button>
-      <div className={"p-4"}>
-        <h1 className="text-4xl font-bold">
-          Welcome to Yoga in the park
-        </h1>
-        <p>Life is supofa</p>
-        {/* <EventForm /> */}
-      </div>
-
-
-      
-      <UnorderedList>
+<Center>
+  <Box className="flex flex-col space-y-4 text-center">
+    <UnorderedList>
       <Flex flexWrap="wrap" alignSelf="flex-end">
         {events.map((event: any) => (
-          <ListItem key={event.id} mb={4} flex="0 0 25%">
+          <ListItem key={event.id} mb={8} ml={4} mr={4} flex="0 0 10%" listStyleType="none">
             <Box
               borderWidth="1px"
               borderRadius="lg"
@@ -42,14 +37,16 @@ export function HomeEventList() {
                 {event.name}
               </Text>
               <Text fontSize="md" mb={2}>
-                Location: {event.location}
+                開催場所: {event.location}
               </Text>
-              <Text fontSize="md">Date: {event.date}</Text>
+              <Text fontSize="md">開催日時: {formatDate(event.date)}</Text>
             </Box>
           </ListItem>
         ))}
       </Flex>
     </UnorderedList>
-    </div>
+  </Box>
+</Center>
+
   );
 }

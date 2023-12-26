@@ -11,7 +11,8 @@ export const createEvent = async (props) => {
       date: props.date,
       organizer: props.organizer,
       createdAt: new Date(),
-      user_id: 2
+      user_id: 2,
+      participant_ids: []
     };
 
     alert("イベントを作成！")

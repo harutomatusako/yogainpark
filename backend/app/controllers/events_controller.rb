@@ -4,19 +4,20 @@ class EventsController < ApplicationController
   # GET /events
   def index
     @events = Event.includes(:user).all
-  
-    render json: @events.as_json(include: [:user])
+    render json: @events.as_json(include: [:user], methods: :participants)
   end
 
   # GET /events/1
   def show
-    render json: @event
+    render json: @event.as_json(include: [:user], methods: :participants)
   end
 
   # POST /events
   def create
     @event = Event.new(event_params)
-   
+  
+    @event.participant_ids = params[:event][:participant_ids].map(&:to_i) if params[:event][:participant_ids]
+
     if @event.save 
       render json: @event, status: :created, location: @event
     else
@@ -26,12 +27,16 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1
   def update
+    # ここでparticipant_idsを配列として処理
+    @event.participant_ids = params[:event][:participant_ids].map(&:to_i) if params[:event][:participant_ids]
+
     if @event.update(event_params)
       render json: @event
     else
       render json: @event.errors, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /events/1
   def destroy
@@ -46,6 +51,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:name, :description, :date, :location, :user_id)
+      params.require(:event).permit(:name, :description, :date, :location, :user_id, participant_ids: [])
     end
 end
