@@ -4,8 +4,8 @@ import { createUser } from "@/_mutations/create-user";
 import { Box, Text, Heading ,ListItem ,UnorderedList ,Flex,Center,Image} from "@chakra-ui/react";
 import useSWR from "swr";
 
-function formatDate(dateString) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+function formatDate(dateString:any) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }as const;
   return new Intl.DateTimeFormat('ja-JP', options).format(new Date(dateString));
 }
 

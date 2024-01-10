@@ -2,8 +2,8 @@ import { Flex, Box, Text, Heading, LinkBox, LinkOverlay } from '@chakra-ui/react
 import Link from 'next/link';
 import useSWR from 'swr';
 
-function formatDateTime(dateString) {
-  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+function formatDateTime(dateString:any) {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }as const;
   return new Intl.DateTimeFormat('ja-JP', options).format(new Date(dateString));
 }
 
@@ -16,7 +16,7 @@ function EventsPage() {
 
   return (
     <Flex wrap="wrap" justify="center" align="start" p={5}>
-      {events.map((event) => (
+      {events.map((event:any) => (
         <Box key={event.id} p={5} borderWidth="1px" borderRadius="lg" boxShadow="lg" m={2} w="300px">
           <LinkBox as="article">
             <Heading size="md" my={2}>

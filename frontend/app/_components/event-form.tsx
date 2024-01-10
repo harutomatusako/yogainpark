@@ -46,7 +46,7 @@ export const EventForm = () => {
     return options;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     await createEvent({

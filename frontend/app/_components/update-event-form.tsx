@@ -53,7 +53,7 @@ export const UpdateEventForm = (props: Props) => {
     return options;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     await updateEvent(props.eventId, {
