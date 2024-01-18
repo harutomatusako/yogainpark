@@ -1,5 +1,5 @@
 // Rails APIのエンドポイント
-const railsApiEndpoint = "http://localhost:3000/events";
+const railsApiEndpoint = "https://rails-production-6d55.up.railway.app/events";
 
 export const createEvent = async (props:any) => {
   try {

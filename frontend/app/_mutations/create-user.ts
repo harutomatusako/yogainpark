@@ -11,7 +11,7 @@ export const createUser = async (props: Props) => {
     };
 
     // Rails APIのエンドポイント
-    const railsApiEndpoint = "http://localhost:3000/users";
+    const railsApiEndpoint = "https://rails-production-6d55.up.railway.app/users";
 
     // Rails APIにデータを送信
     const response = await fetch(railsApiEndpoint, {

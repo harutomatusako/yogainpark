@@ -6,7 +6,7 @@ import { doc, getFirestore, updateDoc } from "firebase/firestore";
  */
 export const deleteEvent = async (eventId: string) => {
   try {
-    const railsApiEndpoint = `http://localhost:3000/events/${eventId}`;
+    const railsApiEndpoint = `https://rails-production-6d55.up.railway.app/events/${eventId}`;
 
     // Rails APIにデータを送信
     const response = await fetch(railsApiEndpoint, {

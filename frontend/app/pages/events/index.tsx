@@ -8,7 +8,7 @@ function formatDateTime(dateString:any) {
 }
 
 function EventsPage() {
-  const { data: events } = useSWR('http://localhost:3000/events')
+  const { data: events } = useSWR('https://rails-production-6d55.up.railway.app/events')
 
   if (!events) {
     return <Flex h="100vh" justify="center" align="center">読み込み中...</Flex>

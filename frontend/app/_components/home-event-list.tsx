@@ -12,7 +12,7 @@ function formatDate(dateString:any) {
 
 
 export function HomeEventList() {
-  const { data: events } = useSWR('http://localhost:3000/events')
+  const { data: events } = useSWR('https://rails-production-6d55.up.railway.app/events')
 
   if (typeof events === "undefined") {
     return null

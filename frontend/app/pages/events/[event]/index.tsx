@@ -18,7 +18,7 @@ type Props = {
 function EventDetails(props: Props) {
   const router = useRouter()
 
-  const { data: event } = useSWR(`http://localhost:3000/events/${props.eventId}`)
+  const { data: event } = useSWR(`https://rails-production-6d55.up.railway.app/events/${props.eventId}`)
 
   if (typeof event === "undefined") {
     return null
